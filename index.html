@@ -9,17 +9,18 @@
   <body>
     <style type='text/css'>
         .embeddedServiceHelpButton .helpButton .uiButton {
-            background-color: #005290;
-            font-family: "Ttnorms", sans-serif;
+            background-color: #25bf75;
+            font-family: "TTNorms", sans-serif;
         }
         .embeddedServiceHelpButton .helpButton .uiButton:focus {
-            outline: 1px solid #005290;
+            outline: 1px solid #25bf75;
         }
     </style>
     <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
     <script type='text/javascript'>
         let listParams = window.location.href.split('.com/');
-        let lang = (listParams && (listParams[listParams.length - 1] == 'en' || listParams[listParams.length - 1] == 'de' || listParams[listParams.length - 1] == 'fr')) ? listParams[listParams.length - 1] : 'es'    
+        //let lang = (listParams && (listParams[listParams.length - 1] == 'en' || listParams[listParams.length - 1] == 'de' || listParams[listParams.length - 1] == 'fr')) ? listParams[listParams.length - 1] : 'es'
+        let lang = (listParams && (listParams[listParams.length - 1] == 'es')) ? 'es' : 'en_US';
         
         var initESW = function(gslbBaseURL) {
             embedded_svc.settings.displayHelpButton = true; //Or false
@@ -42,32 +43,12 @@
     
             embedded_svc.settings.enabledFeatures = ['LiveAgent'];
             embedded_svc.settings.entryFeature = 'LiveAgent';
-            
-            debugger;
-            
-            /*embedded_svc.settings.extraPrechatFormDetails = [{
-                "label":"FirstName",
-                "value":"testNomb",
-                "transcriptFields": ["FirstName__c"]
-                },{
-                "label":"Last Name",
-                "value":"testNomb",
-                "transcriptFields": ["LastName__c"]
-                },{
-                "label":"Email",
-                "value":"testNomb@mail.com",
-                "transcriptFields": ["Email__c"]
-            }];*/
-            
-            /*embedded_svc.settings.prepopulatedPrechatFields = {
-                FirstName: "ValueFirstName",
-                LastName: "ValueLastName",
-                Email: "ValueEmail@Email.com",
-                Company: "ValueCompany"
-            };*/
     
-    
-            
+            embedded_svc.settings.extraPrechatFormDetails = [{
+                "label":"Language",
+                "value": lang,
+                "transcriptFields": ["Language__c"]
+            }];
     
             embedded_svc.init(
                 'https://validatedid.my.salesforce.com',
@@ -81,7 +62,7 @@
                     buttonId: '57368000000c1ee',
                     baseLiveAgentURL: 'https://d.la3-c2-cdg.salesforceliveagent.com/chat',
                     eswLiveAgentDevName: 'chatVID',
-                    isOfflineSupportEnabled: false
+                    isOfflineSupportEnabled: true
                 }
             );
         };
@@ -99,3 +80,4 @@
     </script>
   </body>
 </html>
+
